@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Administrator Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css"
+                            name="stylesheet.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <header style="background-color: #F0F0F0;
+                    border-bottom: 1px solid grey">
+                <ui:insert>
+                    <h:button value="Nutzer erstellen"
+                              outcome="createUser"
+                              styleClass="button"/>
+                    <h:button value="E-Mail-Benachrichtigungen konfigurieren"
+                              outcome="configureMail"
+                              styleClass="button"/>
+                    <h:button value="Zurück"
+                              outcome="return"
+                              styleClass="button"
+                              style="margin-left: 40%"/>
+
+                </ui:insert>
+            </header>
+            <h:dataTable id="items"
+                         columnClasses="fourth,fourth,fourth,fourth"
+                         headerClass="list-header"
+                         rowClasses="list-row-even, list-row-odd"
+                         styleClass="list-background"
+                         value="#{administrativeDashboardBean.users}"
+                         border="1"
+                         style="margin-top: 3em;
+                         width: 80%;"
+                         var="user">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nutzername"
+                                      styleClass="descriptive" />
+                    </f:facet>
+                    <h:outputText value="#{user.username}"
+                                  styleClass="details"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="E-Mail-Benachrichtigungen aktiviert"
+                                      styleClass="descriptive" />
+                    </f:facet>
+                    <h:outputText value="#{user.notificationsEnabled ? '&#x2714;' : '&#x2613;'}"
+                                  styleClass="details"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Administrator"
+                                      styleClass="descriptive"/>
+                    </f:facet>
+                    <h:outputText value="#{user.administrator ? '&#x2714;' : '&#x2613;'}"
+                                  styleClass="details"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Passwort zurücksetzen"
+                                      styleClass="descriptive"/>
+                    </f:facet>
+                    <h:commandButton value="Passwort zurücksetzen"
+                                     styleClass="button details"
+                                     style="margin-left: 2em; color: #707070"
+                                     action="#{administrativeDashboardBean.resetPassword}">
+                        <f:setPropertyActionListener target="#{administrativeDashboardBean.current}"
+                                                     value="#{user}"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>

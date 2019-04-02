@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Einstellungen</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css"
+                            name="stylesheet.css"/>
+    </h:head>
+    <h:body>
+        <h:button value="Zurück"
+                  outcome="return"
+                  styleClass="button"
+                  style="position: absolute; top: 0; right: 0"/>
+        <h:panelGroup styleClass="borderless centered">
+            <h:form id="emailForm">
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless">
+                    <h:outputLabel value="E-Mail-Benachrichtigungen aktiviert:"
+                                   for="notificationsEnabled"
+                                   styleClass="descriptive"
+                                   style="margin-top: 1em;margin-bottom: 2em"/>
+                    <h:selectBooleanCheckbox id="notificationsEnabled"
+                                             value="#{settingsBean.emailEnabled}"
+                                             style="margin-top: 1em;margin-bottom: 1em"/>
+
+                    <h:outputText value="E-Mail:"
+                                  styleClass="descriptive"
+                                  style="margin-top: 1em;margin-bottom: 1em"/>
+                    <h:inputText id="email"
+                                 value="#{settingsBean.email}"
+                                 styleClass="input"
+                                 style="width:16em;"/>
+
+                    <p />
+                    <h:message for="email"
+                               styleClass="error"/>
+
+                    <p/>
+                    <h:commandButton value="Speichern"
+                                     action="#{settingsBean.saveEmail}"
+                                     styleClass="button">
+                        <f:ajax execute="emailForm"
+                                render="emailForm"/>
+                    </h:commandButton>
+
+                </h:panelGrid>
+            </h:form>
+
+            <f:verbatim><hr/></f:verbatim>
+
+            <h:form id="passwordForm">
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless">
+                    <h:outputText value="Altes Passwort:"
+                                  styleClass="descriptive"/>
+                    <h:inputSecret id="oldPw"
+                                   redisplay="true"
+                                   required="true"
+                                   requiredMessage="Geben Sie Ihr altes Passwort ein."
+                                   value="#{settingsBean.oldPassword}"
+                                   validator="#{settingsBean.validateOldPassword}"/>
+
+                    <p/>
+                    <h:message for="oldPw"
+                               styleClass="error"/>
+
+                    <h:outputText value="Neues Passwort:"
+                                  styleClass="descriptive"/>
+                    <h:inputSecret id="newPw"
+                                   required="true"
+                                   requiredMessage="Geben Sie Ihr neues Passwort ein."
+                                   value="#{settingsBean.newPassword}"
+                                   validator="#{settingsBean.validateNewPassword}"/>
+
+                    <p/>
+                    <h:message for="newPw"
+                               styleClass="error"/>
+
+                    <h:outputText value="Neues Passwort wiederholen:"
+                                  styleClass="descriptive"/>
+                    <h:inputSecret id="newPw2"
+                                   required="true"
+                                   requiredMessage="Wiederholen Sie Ihr neues Passwort."
+                                   value="#{settingsBean.newPassword2}"
+                                   validator="#{settingsBean.validateNewPassword2}"/>
+
+                    <p/>
+                    <h:message for="newPw2"
+                               styleClass="error"/>
+
+                    <p/>
+                    <h:commandButton value="Speichern"
+                                     action="#{settingsBean.savePassword}"
+                                     styleClass="button">
+                        <f:ajax execute="passwordForm"
+                                render="passwordForm" />
+                    </h:commandButton>
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+    </h:body>
+</html>

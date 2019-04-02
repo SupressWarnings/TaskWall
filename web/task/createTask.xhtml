@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Aufgabe erstellen</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css"
+                            name="stylesheet.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGroup styleClass="centered">
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless"
+                             style="margin-left: 0%">
+                    <h:outputLabel value = "Titel: "
+                                   styleClass="descriptive"
+                                   style="font-size:1.2em; margin-right: 5%"/>
+                    <h:inputText id="title"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie einen kurzen Titel ein."
+                                 value="#{createTaskBean.title}"
+                                 style="font-size: 1.5em;font-weight: bold;border-bottom:0.25em solid cyan; margin-left: 5%"/>
+
+                    <p/>
+                    <h:message for="title"
+                               styleClass="error" />
+
+                </h:panelGrid>
+                <h:panelGrid columns="4"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless,borderless,borderless">
+                    <h:outputLabel value = "Frist:"
+                                   styleClass="descriptive" />
+                    <h:inputText id="due"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie eine Frist an."
+                                 value="#{createTaskBean.due}"
+                                 converterMessage="Bitte geben Sie die Frist im Format tt.mm.jjjj ein.">
+                        <f:convertDateTime pattern="dd.MM.yyyy"
+                                           type="date" />
+                    </h:inputText>
+
+                    <h:outputLabel value = "Empfänger:"
+                                   styleClass="descriptive" />
+                    <h:inputText id="recipient"
+                                 required="true"
+                                 requiredMessage="Bitte nennen Sie die zuständige Person."
+                                 value="#{createTaskBean.recipient}"
+                                 validator="#{createTaskBean.validateRecipient}"/>
+
+                    <p/>
+                    <h:message for="due"
+                               styleClass="error" />
+                    <p/>
+                    <h:message for="recipient"
+                               styleClass="error" />
+                </h:panelGrid>
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless"
+                             style="margin-left:0%; width:100%">
+                    <h:outputLabel value = "Beschreibung:"
+                                   styleClass="descriptive" style="margin-bottom: 1em"/>
+                    <p/>
+                    <h:inputTextarea id="description"
+                                     required="true"
+                                     requiredMessage="Bitte geben Sie eine Beschreibung ein."
+                                     value="#{createTaskBean.description}"
+                                     style="height: 13em; border-width: 0.0625em 0.0625em 0.125em 0.0625em;
+                                     border-radius: 0.125em; font-family: sans-serif; width: 190%; padding: 1em;"
+                                     styleClass="input" />
+                    <p/>
+
+                    <h:message for="description"
+                               styleClass="error"
+                               style="position: relative; top: -2em;"/>
+                    <h:panelGroup>
+                        <h:button value="Abbrechen"
+                                  outcome="return"
+                                  styleClass="button"
+                                  style="display: inline"/>
+                        <h:commandButton value="Erstellen"
+                                         action="#{createTaskBean.create()}"
+                                         styleClass="button"
+                                         style="display:inline"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{viewTaskBean.title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css"
+                            name="stylesheet.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGroup styleClass="centered">
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless"
+                             style="margin: 5%">
+                    <p/>
+                    <h:outputText value="#{viewTaskBean.title}"
+                                  style="font-size: 3.5em;font-weight: bold;border-bottom:0.25em solid grey;"/>
+
+                </h:panelGrid>
+                <h:panelGrid columns="6"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless,borderless,borderless,borderless,borderless">
+                    <h:outputText value = "Frist:"
+                                  styleClass="descriptive" />
+                    <h:outputText value="#{viewTaskBean.due}"
+                                  styleClass="details">
+                        <f:convertDateTime pattern="dd.MM.yyyy"
+                                           type="date" />
+                    </h:outputText>
+
+                    <h:outputText value = "Erstellt am:"
+                                  styleClass="descriptive" />
+                    <h:outputText value="#{viewTaskBean.created}"
+                                  styleClass="details">
+                        <f:convertDateTime pattern="dd.MM.yyyy"
+                                           type="date" />
+                    </h:outputText>
+
+                    <h:outputText value = "Ersteller:"
+                                  styleClass="descriptive" />
+                    <h:outputText value="#{viewTaskBean.creator}"
+                                  styleClass="details"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2"
+                             styleClass="borderless"
+                             columnClasses="borderless,borderless"
+                             style="margin-left:0%; width:100%">
+                    <h:outputLabel value = "Beschreibung:"
+                                   styleClass="descriptive" style="margin-bottom: 1em"/>
+                    <p/>
+
+                    <h:inputTextarea value="#{viewTaskBean.description}"
+                                     readonly="true"
+                                     style="border: 0.0625em solid grey; width: 90%; height: 18em; margin: 0 5%;
+                                     border-radius: 0.125em; font-family: sans-serif; padding: 1em;
+                                     resize: none;"/>
+
+                </h:panelGrid>
+                <h:panelGroup>
+                    <h:button value="Zurück"
+                              outcome="return"
+                              styleClass="button"/>
+                    <h:commandButton value="Fertigstellen"
+                                     action="#{viewTaskBean.finish}"
+                                     styleClass="button"
+                                     style="display:inline"/>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>

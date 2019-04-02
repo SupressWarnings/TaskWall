@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>SMTP-Einstellungen</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css"
+                            name="stylesheet.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="1"
+                         styleClass="borderless centered"
+                         columnClasses="borderless">
+                <h1>E-Mail Konfiguration:</h1>
+                <h:panelGrid columns="2"
+                             columnClasses="borderless,borderless"
+                             id="panel">
+                    <h:outputLabel value="E-Mail aktiviert"
+                                   for="active"
+                                   styleClass="descriptive"/>
+                    <h:selectBooleanCheckbox id="active"
+                                             value="#{configureMailBean.enabled}">
+                        <f:ajax execute="active"
+                                render="panel"/>
+                    </h:selectBooleanCheckbox>
+
+                    <h:outputText value="Host:"
+                                  styleClass="#{configureMailBean.enabled ? '' : 'invisible'} descriptive" />
+                    <h:inputText id="host"
+                                 value="#{configureMailBean.host}"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie den SMTP-Host ein."
+                                 styleClass="#{configureMailBean.enabled ? '' : 'invisible'}"
+                                 style="width:15em;"/>
+
+                    <p/>
+                    <h:message for="host"
+                               styleClass="error"/>
+
+                    <h:outputText value="User:"
+                                  styleClass="#{configureMailBean.enabled ? '' : 'invisible'} descriptive"/>
+                    <h:inputText id="user"
+                                 value="#{configureMailBean.user}"
+                                 required="true"
+                                 requiredMessage="Bitte geben sie den Nutzernamen ein."
+                                 style="width:15em;"
+                                 styleClass="#{configureMailBean.enabled ? '' : 'invisible'} "/>
+
+                    <p/>
+                    <h:message for="user"
+                               styleClass="error"/>
+
+                    <h:outputText value="Password:"
+                                  styleClass="#{configureMailBean.enabled ? '' : 'invisible'} descriptive"/>
+                    <h:inputText id="password" 
+                                 value="#{configureMailBean.password}"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie das Passwort ein."
+                                 style="width:15em"
+                                 styleClass="#{configureMailBean.enabled ? '' : 'invisible'} "/>
+
+                    <p/>
+                    <h:message for="password"
+                               styleClass="error"/>
+
+                    <h:outputText value="Port:"
+                                  styleClass="#{configureMailBean.enabled ? '' : 'invisible'} descriptive"/>
+                    <h:inputText id="port"
+                                 value="#{configureMailBean.port}"
+                                 required="true"
+                                 requiredMessage="Bitte geben Sie den Port ein."
+                                 style="width:15em;"
+                                 styleClass="#{configureMailBean.enabled ? '' : 'invisible'}"
+                                 converterMessage="Der Port muss eine Zahl zwischen 1 und 50.000 sein.">
+                        <f:converter converterId="javax.faces.Integer"/>
+                    </h:inputText>
+
+                    <p/>
+                    <h:message for="port"
+                               styleClass="error"/>
+
+                    <h:button value="Zurück"
+                              styleClass="button"
+                              outcome="return"/>
+                    <h:commandButton value="Speichern"
+                                     styleClass="button"
+                                     action="#{configureMailBean.save}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

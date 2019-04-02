@@ -1,0 +1,107 @@
+/*
+This .css file is the standard for the complete application.
+All other styling is individual for the UI-component and thus added inline.
+*/
+body{
+    font-size: 1.2em;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+table, th, td {
+    margin: auto;
+    line-height: 1.2;
+    vertical-align: middle;
+    border: 0.1em solid darkgrey;
+    border-collapse: collapse;
+}
+
+tr {
+    height: 1.5em;
+}
+
+p{
+    height: 0.1em;
+}
+
+/* Adds a cyan bottom border and increases the font's size */
+input, .input{
+    font-size: 1.2em;
+    border-style: solid;
+    border-width: 0 0 0.125em 0;
+    border-color: cyan;
+    margin: 0 2em;
+    resize: none;
+}
+
+/* Adds a cyan border and lightgrey background to buttons */
+.button {
+    margin: 2em;
+    height: 3em;
+    display: inline;
+
+    font-size: 1em;
+
+    border-style: solid;
+    border-width: 0.2em;
+    border-color: cyan;
+    border-radius: 0.3em;
+
+    padding: 0 1.25em;
+    background-color: #E0FFFF;
+    color: #707070;
+}
+
+/* Makes the font smaller and darkgrey */
+.descriptive{
+    color: darkgrey;
+    font-size: 0.8em;
+    margin: 3em;
+}
+
+/* Makes the font bigger and grey */
+.details{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    font-size: 1.2em;
+    color: grey;
+}
+
+/* Error class making the font smaller and red */
+.error{
+    color: red;
+    font-size: 0.8em;
+    margin: 0 3em;
+    vertical-align: 1em;
+}
+
+/* Places an object in the center of the screen */
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style: none;
+    border-width: 0;
+}
+
+/* Removes the border of an object */
+.borderless{
+    border: 0 solid white;
+}
+
+/* Makes an object transparent so that you can not see it but it still uses space */
+.invisible{
+    color: transparent;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.fourth{
+    width: 25%;
+}
+
+.small{
+    width: 1em;
+}
